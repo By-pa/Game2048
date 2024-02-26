@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Game2048WindowsFormsApp
@@ -61,7 +54,14 @@ namespace Game2048WindowsFormsApp
 
 				if (labelsMap[indexRow, indexColumn].Text == String.Empty)
 				{
-					labelsMap[indexRow, indexColumn].Text = "2";
+					var random = new Random();
+					var randomNumber = random.Next(1, 101);
+					if (randomNumber >= 1 && randomNumber <= 75)
+						randomNumber = 2;
+					else
+						randomNumber = 4;
+
+					labelsMap[indexRow, indexColumn].Text = randomNumber.ToString();
 					break;
 				}
 			}
@@ -263,6 +263,22 @@ namespace Game2048WindowsFormsApp
 
 			GenerateNumber();
 			ShowScore();
+		}
+
+		private void рестартToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Restart();
+		}
+
+		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+		private void просмотрToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var rules = "Ваша цель получить число 2048 путем складывания цифр, для этого используйте стрелочки 'Вверх, вниз, вправо, влево'. Перемещаются все цифры разом в ту сторону, в которую вы направили, если числа одинаковые - они складываются ";
+			MessageBox.Show(rules);
 		}
 	}
 }
